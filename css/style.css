@@ -314,7 +314,9 @@ body {
   border-bottom-right-radius: 30%;
   position: absolute;
   right: 40px;
-  top: 45%;
+  top: 55%;
+  height:250px;
+  width:250px;
   opacity: .8; }
   @media only screen and (max-width: 37.5em) {
     .ana {
