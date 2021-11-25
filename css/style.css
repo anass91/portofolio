@@ -1,0 +1,475 @@
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+@import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Karla&display=swap");
+@keyframes moveJob {
+  0% {
+    transform: translateY(-100px); }
+  50% {
+    transform: translateY(50px); }
+  100% {
+    transform: translateY(0); } }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(to right bottom, rgba(0, 127, 95, 0.8), rgba(238, 239, 32, 0.8)), url(../photo/bg--1.jpeg);
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+.header {
+  position: relative;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  @media only screen and (max-width: 56.25em) {
+    .header {
+      flex-direction: column;
+      padding: 2rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .header {
+      flex-direction: row;
+      padding: 2rem; } }
+  @media only screen and (min-width: 112.5em) {
+    .header {
+      padding: 2rem 15rem; } }
+  .header-logo-box {
+    height: 100%;
+    text-align: center;
+    margin-top: -5px;
+    margin-left: 12rem; }
+    @media only screen and (max-width: 37.5em) {
+      .header-logo-box {
+        margin-left: 2rem; } }
+    @media only screen and (max-width: 25em) {
+      .header-logo-box {
+        margin-left: 0 !important; } }
+    @media only screen and (max-width: 56.25em) {
+      .header-logo-box {
+        text-align: center;
+        margin-left: 2rem; } }
+  .header-logo {
+    font-size: 3rem;
+    color: #eeef20;
+    font-family: "Fredoka One", cursiv;
+    letter-spacing: 1.5px; }
+    .header-logo b {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: bold;
+      font-size: 3.2rem;
+      text-shadow: 0 0.3rem 0.6rem rgba(255, 255, 255, 0.4); }
+    @media only screen and (max-width: 37.5em) {
+      .header-logo {
+        font-size: 2.8rem !important; } }
+    @media only screen and (max-width: 25em) {
+      .header-logo {
+        font-size: 2.5rem !important; } }
+    @media only screen and (max-width: 56.25em) {
+      .header-logo {
+        font-size: 5em; } }
+    @media only screen and (min-width: 112.5em) {
+      .header-logo {
+        font-size: 6em;
+        margin-top: 20px; } }
+  .header-nav {
+    height: 100%;
+    padding: 2rem;
+    margin-right: 11rem; }
+    @media only screen and (max-width: 37.5em) {
+      .header-nav {
+        display: none; } }
+    @media only screen and (max-width: 56.25em) {
+      .header-nav {
+        padding: 0;
+        margin: 40px 0; } }
+    @media only screen and (min-width: 112.5em) {
+      .header-nav {
+        padding: 0;
+        margin-top: 40px; } }
+  .header-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    list-style: none; }
+  .header-items {
+    transition: all .4 ease-in;
+    font-size: 1.7rem;
+    margin-left: 30px;
+    font-family: "Fredoka One", cursiv; }
+    @media only screen and (max-width: 56.25em) {
+      .header-items {
+        font-size: 2.4em;
+        margin-left: 30px; } }
+    @media only screen and (min-width: 112.5em) {
+      .header-items {
+        font-size: 4em; } }
+    .header-items-items:not(first-child) {
+      margin-left: 25px; }
+    .header-items:hover {
+      transform: scale(1.2) skewY(-10deg);
+      color: #fff; }
+    .header-items:hover a {
+      color: #fff; }
+    .header-items a {
+      text-decoration: none;
+      color: #d4d700;
+      text-shadow: 0px 5px 15xp #000; }
+  .header-menu {
+    display: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4); }
+    .header-menu:hover {
+      transform: scale(50); }
+    @media only screen and (max-width: 37.5em) {
+      .header-menu {
+        display: block; } }
+    @media only screen and (max-width: 25em) {
+      .header-menu {
+        display: block; } }
+  .header:target {
+    opacity: 1;
+    visibility: visible; }
+
+.section-job {
+  background-color: rgba(221, 223, 0, 0.6);
+  padding: 2.3rem;
+  height: 250px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9999;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px); }
+  .section-job-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+  .section-job-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 23%;
+    height: 100%;
+    border-radius: 2px;
+    box-shadow: 0px 5px 10px #000; }
+    .section-job-box h2, .section-job-box a {
+      opacity: 0; }
+    .section-job-box a {
+      opacity: 0; }
+    .section-job-box__bg1 {
+      background-image: url(../photo/bg-a1.png);
+      background-size: cover;
+      background-position: center; }
+    .section-job-box:hover {
+      background-image: linear-gradient(to right, #dddf00, #2b9348); }
+    .section-job-box:hover h2 {
+      opacity: 1; }
+  .section-job__close {
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    font-size: 3rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff; }
+
+.section-contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 12rem;
+  background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); }
+  .section-contact-content {
+    width: 50%;
+    background-color: #80b918;
+    padding: 2rem 4rem;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+    .section-contact-content input {
+      height: 4rem;
+      border: none;
+      outline: none;
+      padding-left: 15px; }
+    .section-contact-content-p1 {
+      width: 48%; }
+    .section-contact-content-p2 {
+      width: 48%;
+      margin-left: 15px; }
+    .section-contact-content-p3 {
+      width: 100%; }
+    .section-contact-content-p5 {
+      width: 100%;
+      height: 200px;
+      border: none;
+      outline: none; }
+    .section-contact-content-p6 {
+      text-align: center; }
+
+.home {
+  overflow: hidden;
+  min-height: 60vh;
+  position: relative;
+  width: 100%;
+  padding: 4rem 12rem;
+  margin-top: 40px; }
+  @media only screen and (max-width: 37.5em) {
+    .home {
+      padding: 1.7rem 2.4rem;
+      height: auto; } }
+  @media only screen and (max-width: 25em) {
+    .home {
+      padding: 1rem !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .home {
+      padding: 2rem 5rem;
+      height: auto; } }
+  .home-content {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+    @media only screen and (max-width: 37.5em) {
+      .home-content {
+        flex-direction: column;
+        height: auto; } }
+    @media only screen and (max-width: 56.25em) {
+      .home-content {
+        flex-direction: column; } }
+  .home-box {
+    height: 100%;
+    width: 46%;
+    padding: 1rem; }
+    @media only screen and (max-width: 37.5em) {
+      .home-box {
+        width: 100%;
+        height: 50%;
+        padding: 0 !important; } }
+    @media only screen and (max-width: 56.25em) {
+      .home-box {
+        width: 100%;
+        height: 50%; } }
+
+.svg {
+  height: 400px; }
+  @media only screen and (max-width: 37.5em) {
+    .svg {
+      height: 300px;
+      margin-top: 33px; } }
+
+.ps {
+  position: relative; }
+
+.ana {
+  border-top-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+  position: absolute;
+  right: 40px;
+  top: 45%;
+  opacity: .8; }
+  @media only screen and (max-width: 37.5em) {
+    .ana {
+      height: 170px !important;
+      width: 170px !important;
+      top: 40%;
+      right: 0px !important; } }
+  @media only screen and (max-width: 25em) {
+    .ana {
+      height: 120px !important;
+      width: 120px !important;
+      right: 0 !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .ana {
+      height: 200px;
+      width: 200px;
+      top: 50%;
+      right: 15px; } }
+  @media only screen and (min-width: 112.5em) {
+    .ana {
+      width: 300px;
+      height: 300px;
+      top: 60%; } }
+
+.lista {
+  margin-top: 30px;
+  margin-left: 40px;
+  line-height: 30px; }
+  @media only screen and (max-width: 37.5em) {
+    .lista {
+      margin-left: 20px; } }
+  @media only screen and (max-width: 25em) {
+    .lista {
+      padding: 10px;
+      margin-left: 0 !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .lista {
+      line-height: 50px;
+      margin-top: 20px; } }
+
+.lista li {
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  color: blue;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
+  @media only screen and (max-width: 37.5em) {
+    .lista li {
+      font-size: 1.4rem !important;
+      margin-top: 50px;
+      margin-left: -10px !important;
+      color: gold;
+      font-weight: 700;
+      line-height: 0; } }
+  @media only screen and (max-width: 25em) {
+    .lista li {
+      font-size: 1.4em !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .lista li {
+      font-size: 2.8em; } }
+
+.invisible {
+  opacity: 1;
+  visibility: visible; }
+
+.margin-bottom-small {
+  margin-bottom: 2rem; }
+
+.margin-bottom-medium {
+  margin-bottom: 4rem; }
+
+.margin-bottom-big {
+  margin-bottom: 6rem; }
+
+.title-1 {
+  letter-spacing: .1rem;
+  font-weight: 700;
+  transition: .6s all ease;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+  -webkit-background-clip: text;
+  color: transparent;
+  backface-visibility: hidden;
+  background-image: linear-gradient(to right, #55a630, #2b9348); }
+  .title-1:hover {
+    transform: scale(1.1) skewX(-12deg); }
+
+.btn {
+  display: none;
+  color: red;
+  padding: 1rem 4rem;
+  background-color: #fff;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-family: "Fredoka One", cursiv;
+  margin-top: 8rem; }
+  .btn:hover {
+    opacity: 1;
+    visibility: visible;
+    display: block; }
+
+.btn-blue {
+  color: #fff;
+  padding: 1rem 5rem;
+  background-color: #76d6f3;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-family: "Fredoka One", cursiv;
+  text-align: center; }
+
+.btn-red {
+  color: #fff;
+  padding: 1rem 5rem;
+  background-color: rgba(255, 0, 0, 0.658);
+  border-radius: 20px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-family: "Fredoka One", cursiv;
+  text-align: center;
+  padding-left: 20px;
+  margin-bottom: 10px; }
+
+.close {
+  position: absolute;
+  right: 4.5rem;
+  top: 1.4rem;
+  font-size: 5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff; }
+
+.heading-1 {
+  font-size: 5em;
+  font-family: "Fredoka One", cursiv;
+  color: rgba(255, 255, 255, 0.8); }
+  @media only screen and (max-width: 56.25em) {
+    .heading-1 {
+      font-size: 5.4em;
+      margin-bottom: 20px; } }
+  @media only screen and (max-width: 37.5em) {
+    .heading-1 {
+      font-size: 3.3em; } }
+  @media only screen and (max-width: 25em) {
+    .heading-1 {
+      font-size: 3em; } }
+  @media only screen and (min-width: 112.5em) {
+    .heading-1 {
+      font-size: 8em; } }
+
+.sp {
+  color: #bfd200;
+  font-style: oblique; }
